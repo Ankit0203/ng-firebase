@@ -40,6 +40,7 @@ export class CountryComponent implements OnInit {
   onSubmit(f) {
     if (f.form.valid) {
       const CountryData = JSON.parse(JSON.stringify(this.Country));
+      console.log('countryData', CountryData)
       if (this.countryId == null) {
         console.log('this.countryId ==', this.countryId)
         this._countryService.addCountryInforamtion(CountryData);
