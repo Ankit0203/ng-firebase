@@ -9,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(public ngAuthService : NgAuthService) { }
+  constructor(private auth : NgAuthService) { }
 
   ngOnInit(): void {
   }
 
+  login(frm :any) {
+    this.auth.SignIn(frm.value.email, frm.value.password);
+  }
 }

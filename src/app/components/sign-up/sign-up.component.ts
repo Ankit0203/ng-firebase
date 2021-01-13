@@ -10,7 +10,13 @@ import { NgAuthService } from 'src/app/service/authentication.service';
 export class SignUpComponent implements OnInit {
 
   constructor(public ngAuthService : NgAuthService) { }
-  ngOnInit(): void {
+
+  ngOnInit() {
+   
   }
 
+  createUser(frm) {
+    this.ngAuthService.SignUp(frm.value);
+  }
+ 
 }

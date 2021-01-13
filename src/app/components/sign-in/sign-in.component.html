@@ -1,43 +1,31 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-12">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
 
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="displayTable">
-                    <div class="displayTableCell">
-                        <div class="authBlock">
-                            <h3>Signin</h3>
-                            <div class="formGroup">
-                                <input type="text" class="form-control" placeholder="Username" #userName required>
-                            </div>
-                             <br>
-                            <div class="formGroup">
-                                <input type="password" class="form-control" placeholder="Password" #userPassword
-                                    required>
-                            </div>
- <br>
-                            <div class="formGroup">
-                                <input type="button" class="btn btn-primary btn-block" value="Sign in"
-                                    (click)="ngAuthService.SignIn(userName.value, userPassword.value)">
-                            </div>
-
-                            <div class="forgotPassword">
-                                <span routerLink="/forgot-password">Forgot Password?</span>
-                            </div>
-                        </div>
-
-                        <div class="redirectToLogin">
-                            <span>Not registered yet?<span class="redirect" routerLink="/register-user">
-                                    Register</span></span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="email">Email</label>
+            <input ngModel #email="ngModel" name="email" type="email" class="form-control">
+          </div>
         </div>
-
-
+  
+        <div class="row">
+          <div class="col-12">
+            <label for="password">Password</label>
+            <input ngModel #password="ngModel" name="password" type="password" class="form-control">
+          </div>
+        </div>
+  
+        <div class="row mt-2">
+          <div class="col-12">
+            <a routerLink="/register-user">Click here to register</a>
+          </div>
+  
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Login</button>
+          </div>
+        </div>
+  
+      </form>
     </div>
-</div>
+  </div>

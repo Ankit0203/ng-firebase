@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgAuthService } from 'src/app/service/authentication.service';
 
@@ -8,10 +9,34 @@ import { NgAuthService } from 'src/app/service/authentication.service';
   providers  :[NgAuthService]
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(public ngAuthService : NgAuthService) { }
-
-  ngOnInit(): void {
+  user: any;
+  constructor(public auth : NgAuthService, private router : Router) { 
+   
   }
 
+  ngOnInit(): void {
+    this.auth.getUserState()
+    .subscribe( user => {
+      this.user = user;
+    })
+  }
+
+  login() {
+    this.router.navigate(['/sign-in']);
+  }
+
+  logout() {
+    this.auth.SignOut();
+  }
+
+  register() {
+    this.router.navigate(['register-user']);
+  }
+
+  forgot(){
+    this.router.navigate(['forgot-password']);
+  }
+  country(){
+    this.router.navigate(['country']);
+  }
 }

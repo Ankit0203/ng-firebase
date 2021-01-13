@@ -1,19 +1,10 @@
-<div class="container mt-5" style="max-width: 600px">
-    <div class="row" *ngIf="ngAuthService.userState as user">
-      <div class="media">
-        <div class="media-body">
-          <h2>Hi: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h2>
-          <p>User ID: <strong>{{user.uid}}</strong></p>
-          <p>Email: <strong>{{user.email}}</strong></p>
-        </div>
-      </div>
-    </div>
- 
-    <a class="btn btn-block btn-primary" (click)="ngAuthService.SignOut()">
-      Sign Out
-    </a>
-  </div>
- <br><br>
-  <a class="btn btn-block btn-primary" routerLink="/country">
-   Crud Operation
-  </a>
+<h4 class="mt-4">Home Page</h4>
+  
+<p *ngIf="user">Logged in as:  Email :- {{ user?.email }} -  Name : - {{ user?.displayName }} - Number :- {{user?.photoURL}}</p>
+
+<button class="btn btn-primary mr-2" *ngIf="!user" (click)="register()">Register</button>
+<button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
+<button class="btn btn-primary" *ngIf="!user" (click)="login()">Login</button> <br> <br>
+<button class="btn btn-primary" *ngIf="!user" (click)="forgot()">Forgot Password</button>
+<br> <br>
+<button class="btn btn-primary" *ngIf="user" (click)="country()">Country Crud</button>

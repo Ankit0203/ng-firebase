@@ -28,35 +28,44 @@ export class NgAuthService {
       this.afAuth.authState.subscribe(user => {
         if (user) {
           this.userState = user;
-          localStorage.setItem('user', JSON.stringify(this.userState));
-          JSON.parse(localStorage.getItem('user'));
+          sessionStorage.setItem('user', JSON.stringify(this.userState));
+          JSON.parse(sessionStorage.getItem('user'));
         } else {
-          localStorage.setItem('user', null);
-          JSON.parse(localStorage.getItem('user'));
+          sessionStorage.setItem('user', null);
+          JSON.parse(sessionStorage.getItem('user'));
         }
       })
     }
   
     SignIn(email, password) {
-      return this.afAuth.signInWithEmailAndPassword(email, password)
-        .then((result) => {
-        //   this.ngZone.run(() => {
-            this.router.navigate(['dashboard']);
-        //   });
-          this.SetUserData(result.user);
-        }).catch((error) => {
-          window.alert(error.message)
-        })
+      this.afAuth.signInWithEmailAndPassword(email, password)
+      .catch(error => {
+        alert(error)
+      })
+      .then(userCredential => {
+        if(userCredential) {
+          this.router.navigate(['']);
+          this.SetUserData(userCredential.user);
+        }
+      })
     }
   
-    SignUp(email, password) {
-      return this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then((result) => {
+    SignUp(user) {
+      console.log('user', user);
+      this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+        .then(userCredential => {
+          this.userState = user;
           this.SendVerificationMail();
-          this.SetUserData(result.user);
+          this.SetUserData(userCredential.user);
+          console.log('creadential', userCredential);
+           userCredential.user.updateProfile( {
+            displayName: user.firstName + ' ' + user.lastName,
+            photoURL : user.no,
+            
+          });
         }).catch((error) => {
-          window.alert(error.message)
-        })
+              window.alert(error.message)
+            })
     }
 
     SendVerificationMail() {
@@ -70,13 +79,14 @@ export class NgAuthService {
       return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
+        this.router.navigate([''])
       }).catch((error) => {
         window.alert(error)
       })
     }
   
     get isLoggedIn(): boolean {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(sessionStorage.getItem('user'));
       return (user !== null && user.emailVerified !== false) ? true : false;
     }
   
@@ -107,9 +117,13 @@ export class NgAuthService {
       })
     }
    
+    getUserState() {
+      return this.afAuth.authState;
+    }
+
     SignOut() {
       return this.afAuth.signOut().then(() => {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         this.router.navigate(['sign-in']);
       })
     }  
