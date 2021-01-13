@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
     this.auth.getUserState()
       .subscribe(user => {
         this.user = user;
+        console.log(user)
+        // console.log(user.metadata.creationTime)
       })
   }
 

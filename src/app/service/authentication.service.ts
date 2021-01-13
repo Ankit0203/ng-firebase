@@ -124,7 +124,7 @@ export class NgAuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       sessionStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['']);
     })
   }
 }
