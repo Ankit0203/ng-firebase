@@ -5,16 +5,16 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
-  providers  :[NgAuthService]
+  providers: [NgAuthService]
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private auth : NgAuthService) { }
+  constructor(private auth: NgAuthService) { }
 
   ngOnInit(): void {
   }
 
-  login(frm :any) {
+  login(frm: any) {
     this.auth.SignIn(frm.value.email, frm.value.password);
   }
 }

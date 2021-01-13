@@ -6,19 +6,17 @@ import { NgAuthService } from 'src/app/service/authentication.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers  :[NgAuthService]
+  providers: [NgAuthService]
 })
 export class DashboardComponent implements OnInit {
   user: any;
-  constructor(public auth : NgAuthService, private router : Router) { 
-   
-  }
+  constructor(public auth: NgAuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.auth.getUserState()
-    .subscribe( user => {
-      this.user = user;
-    })
+      .subscribe(user => {
+        this.user = user;
+      })
   }
 
   login() {
@@ -33,10 +31,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['register-user']);
   }
 
-  forgot(){
+  forgot() {
     this.router.navigate(['forgot-password']);
   }
-  country(){
+  country() {
     this.router.navigate(['country']);
   }
 }

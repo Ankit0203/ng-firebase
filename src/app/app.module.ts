@@ -27,7 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     DashboardComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    
+
   ],
   providers: [CountryService],
   bootstrap: [AppComponent]
